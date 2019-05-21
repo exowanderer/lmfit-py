@@ -1348,6 +1348,13 @@ class Minimizer(object):
             # assuming prior prob = 1, this is true
             _neg2_log_likel = -2*result.residual
 
+            if isinstance(_neg2_log_likel, (tuple, list, np.array)):
+                print('Emcee provided: {} of type {} and len {}'.format(
+                _neg2_log_likel, type(_neg2_log_likel), len(_neg2_log_likel)))
+                _neg2_log_likel = np.float32(_neg2_log_likel[:1])
+                print('Emcee provided: {} of type {} and len {}'.format(
+                _neg2_log_likel, type(_neg2_log_likel), len(_neg2_log_likel)))
+
             # assumes that residual is properly weighted
             result.chisqr = np.exp(_neg2_log_likel)
 
